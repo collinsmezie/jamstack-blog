@@ -1,0 +1,35 @@
+.art-link,
+.science-link,
+.technology-link,
+.cinema-link,
+.design-link,
+.food-link {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.postTopic {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  width: max-content;
+  font-size: 14px;
+  /* font-weight: 600; */
+}
+
+/* Link {
+  color: #1a202c;
+  text-decoration: none;
+  border-bottom: 2px solid #cbd5e0;
+  transition: all 0.3s ease;
+}
+
+Link:hover {
+  color: #4a5568;
+  border-bottom: 2px solid #4a5568;
+} */
