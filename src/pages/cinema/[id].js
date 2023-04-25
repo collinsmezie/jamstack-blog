@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 
   const response = await client.getEntries({
     content_type: "topic",
-    "fields.name": "FOOD",
+    "fields.name": "CINEMA",
   });
 
   const { fields: { post } } = response.items[0];
@@ -47,7 +47,7 @@ export async function getStaticProps({ params }) {
 
 
 
-export default function FoodPostDetails({ post }) {
+export default function CinemaPostDetails({ post }) {
   const {
     authorPhoto,
     authorName,

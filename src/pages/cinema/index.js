@@ -1,4 +1,4 @@
-import NoPublishedPosts from "@/components/noPostPage";
+import NoPublishedPosts from "../../components/noPublishedPosts";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { useEffect, useState } from "react";
 import { createClient } from "contentful";
@@ -29,14 +29,11 @@ const CinemaBlogPosts = () => {
           fields: { post },
           sys,
         } = response.items[0];
-        // console.log(post);
-        // console.log('response',response.items[0].fields.name)
-        console.log('response',response.items[0])
-
-
-        if (!post.length) {
-            return <NoPublishedPosts topic={response.items[0].fields.name} />;
+        
+        if (!response.items[0].fields.hasOwnProperty('post')) {
+          return <NoPublishedPosts topic={response.items[0].fields.name} />;
         }
+        
 
         const copies = post.map(({ fields = {}, sys }) => {
           const {

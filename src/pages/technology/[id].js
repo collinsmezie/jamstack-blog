@@ -61,13 +61,13 @@ export default function TechPostDetails({ post }) {
   const { id } = post.sys;
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen">
       <Navbar className="bg-gray-100" />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="py-6 sm:py-8 md:py-10 lg:py-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
             <div className="lg:col-span-2">
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <div className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-300">
                 {blogPostImage && (
                   <img
                     src={blogPostImage.fields.file.url}
@@ -85,7 +85,7 @@ export default function TechPostDetails({ post }) {
               </div>
             </div>
             <div className="lg:col-span-1">
-  <div className="bg-white rounded-lg shadow-lg px-6 py-8">
+  <div className="bg-white rounded-lg shadow-lg px-6 py-8 border border-gray-200">
     <div className="flex items-center mb-4">
       {authorPhoto && (
         <img
