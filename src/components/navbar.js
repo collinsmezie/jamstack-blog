@@ -36,7 +36,6 @@ export default function Navbar() {
               href={`/${category.fields.slug}`}
               passHref
             >
-              {console.log(category.fields.slug)}
               <div
                 className={`${styles["category-link"]} text-lg font-light font-sans hover:text-teal-500 hover:border-teal-500 transition-colors duration-100 cursor-pointer`}
               >
