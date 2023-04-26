@@ -4,6 +4,7 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { createClient } from "contentful";
 import StarIcon from "../../components/StarIcon";
 import { FaFacebook, FaTwitter, FaLinkedin, FaEnvelope, FaCheckCircle, FaPlayCircle} from 'react-icons/fa';
+import Image from 'next/image';
 
 
 export async function getStaticPaths() {
@@ -20,7 +21,7 @@ export async function getStaticPaths() {
   const { fields: { post } } = response.items[0];
 
   const paths = post.map((post) => ({params: { id: post.sys.id },}));
-  // console.log('paths',paths);
+
   return { paths, fallback: false };
 }
 
@@ -69,7 +70,7 @@ export default function DesignPostDetails({ post }) {
             <div className="lg:col-span-2">
               <div className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-300">
                 {blogPostImage && (
-                  <img
+                  <Image
                     src={blogPostImage.fields.file.url}
                     alt={postTitle}
                     className="w-full object-cover object-center"
@@ -88,7 +89,7 @@ export default function DesignPostDetails({ post }) {
   <div className="bg-white rounded-lg shadow-lg border border-gray-200 px-6 py-8">
     <div className="flex items-center mb-4">
       {authorPhoto && (
-        <img
+        <Image
           src={authorPhoto.fields.file.url}
           alt={authorName}
           className="w-12 h-12 rounded-full mr-4"
