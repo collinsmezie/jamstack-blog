@@ -10,9 +10,9 @@ import TagIcon from "../../components/TagIcon";
 import StarIcon from "../../components/StarIcon";
 import styles from "../technology/index.module.css";
 
-const CinemaBlogPosts = () => {
+const ArtBlogPosts = () => {
   const [fieldCopies, setFieldCopies] = useState([]);
-  const [noPost, setNoPost] = useState(false);
+  const [data, setData] = useState({});
 
   useEffect(() => {
     const client = createClient({
@@ -23,7 +23,7 @@ const CinemaBlogPosts = () => {
     client
       .getEntries({
         content_type: "topic",
-        "fields.name": "CINEMA",
+        "fields.name": "ART",
       })
       .then((response) => {
         const {
@@ -32,9 +32,15 @@ const CinemaBlogPosts = () => {
         } = response.items[0];
       
         if (!response.items[0].fields.hasOwnProperty('post')) {
-            setNoPost(true)
+            const dataObj = {
+              noPost: true,
+              topic: response.items[0].fields.name,
+              sysId: response.items[0].sys.id
+            }
+            setData(dataObj)
             return;
         }
+
 
         const copies = post.map(({ fields = {}, sys }) => {
           const {
@@ -64,20 +70,26 @@ const CinemaBlogPosts = () => {
       .catch(console.error);
   }, []);
 
-  if(noPost) return <NoPublishedPosts topic={"CINEMA"} />
+  if(data.noPost) return(
+    <>
+    {/* <Navbar />  */}
+    <NoPublishedPosts topic={data.topic} id={data.sysId} />
+    {/* <Footer />   */}
+    </>
+  )
 
   return (
     <div className="mx-auto">
       <Navbar />
       <Head>
-        <title>CINEMA Blog Posts</title>
+        <title>ART Blog Posts</title>
       </Head>
       <div className={styles.topicSection}>
         <div className={styles.topic}>
           <div className="inline-block rounded-full bg-gray-200 p-1 mr-3">
             <TagIcon />
           </div>
-          <h1 className={styles.tech}>CINEMA</h1>
+          <h1 className={styles.tech}>ART</h1>
         </div>
         <div className={styles.buttons}>
           <button className="bg-teal-500 hover:bg-white text-white hover:text-teal-500 font-bold py-1 px-2 rounded-full border-2 border-teal-500 hover:border-teal-500 transition-colors duration-300">
@@ -142,6 +154,6 @@ const CinemaBlogPosts = () => {
   );
 };
 
-export default CinemaBlogPosts;
+export default ArtBlogPosts;
 
       
