@@ -94,7 +94,7 @@ const CinemaBlogPosts = () => {
           <div className={styles.profileInfo}>
             <div className="">
               {fields.authorPhoto && (
-                <img
+                <Image
                   src={fields.authorPhoto}
                   alt={fields.authorName}
                   className="w-12 h-12 rounded-full mr-4"
@@ -126,7 +126,7 @@ const CinemaBlogPosts = () => {
             </div>
             <div className="mb-10">
               {fields.blogPostImage && (
-                <img
+                <Image
                   src={fields.blogPostImage}
                   width={180}
                   height={100}
