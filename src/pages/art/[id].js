@@ -69,7 +69,7 @@ export default function ArtPostDetails({ post }) {
             <div className="lg:col-span-2">
               <div className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-300">
                 {blogPostImage && (
-                  <img
+                  <Image
                     src={blogPostImage.fields.file.url}
                     alt={postTitle}
                     className="w-full object-cover object-center"
@@ -88,7 +88,7 @@ export default function ArtPostDetails({ post }) {
   <div className="bg-white rounded-lg shadow-lg border border-gray-200 px-6 py-8">
     <div className="flex items-center mb-4">
       {authorPhoto && (
-        <img
+        <Image
           src={authorPhoto.fields.file.url}
           alt={authorName}
           className="w-12 h-12 rounded-full mr-4"
