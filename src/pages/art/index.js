@@ -1,3 +1,4 @@
+import NoPublishedPosts from "../../components/noPublishedPosts";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { useEffect, useState } from "react";
 import { createClient } from "contentful";
@@ -11,8 +12,9 @@ import styles from "../technology/index.module.css";
 import Image from "next/image";
 
 
-const DesignBlogPosts = () => {
+const ArtBlogPosts = () => {
   const [fieldCopies, setFieldCopies] = useState([]);
+  const [data, setData] = useState({});
 
   useEffect(() => {
     const client = createClient({
@@ -23,14 +25,24 @@ const DesignBlogPosts = () => {
     client
       .getEntries({
         content_type: "topic",
-        "fields.name": "DESIGN",
+        "fields.name": "ART",
       })
       .then((response) => {
         const {
           fields: { post },
           sys,
         } = response.items[0];
-        // console.log('response',response);
+      
+        if (!response.items[0].fields.hasOwnProperty('post')) {
+            const dataObj = {
+              noPost: true,
+              topic: response.items[0].fields.name,
+              sysId: response.items[0].sys.id
+            }
+            setData(dataObj)
+            return;
+        }
+
 
         const copies = post.map(({ fields = {}, sys }) => {
           const {
@@ -45,9 +57,9 @@ const DesignBlogPosts = () => {
 
           return {
             authorName,
-            authorPhoto: authorPhoto && `https:${authorPhoto.fields.file.url}`,
+            authorPhoto: authorPhoto && authorPhoto.fields.file.url,
             authorWebsite,
-            blogPostImage: blogPostImage && `https:${blogPostImage.fields.file.url}`,
+            blogPostImage: blogPostImage && blogPostImage.fields.file.url,
             postBody: postBody && postBody.content[0],
             postTitle,
             published,
@@ -60,18 +72,26 @@ const DesignBlogPosts = () => {
       .catch(console.error);
   }, []);
 
+  if(data.noPost) return(
+    <>
+    {/* <Navbar />  */}
+    <NoPublishedPosts topic={data.topic} id={data.sysId} />
+    {/* <Footer />   */}
+    </>
+  )
+
   return (
     <div className="mx-auto">
       <Navbar />
       <Head>
-        <title>Design Blog Posts</title>
+        <title>ART Blog Posts</title>
       </Head>
       <div className={styles.topicSection}>
         <div className={styles.topic}>
           <div className="inline-block rounded-full bg-gray-200 p-1 mr-3">
             <TagIcon />
           </div>
-          <h1 className={styles.tech}>Design</h1>
+          <h1 className={styles.tech}>ART</h1>
         </div>
         <div className={styles.buttons}>
           <button className="bg-teal-500 hover:bg-white text-white hover:text-teal-500 font-bold py-1 px-2 rounded-full border-2 border-teal-500 hover:border-teal-500 transition-colors duration-300">
@@ -115,7 +135,7 @@ const DesignBlogPosts = () => {
                 {documentToReactComponents(fields.postBody)}
               </div>
               <div className="flex items-center">
-                <Link href={`/design/${fields.id}`}>
+                <Link href={`/cinema/${fields.id}`}>
                   <div className={styles.readPostBtn}>Read More</div>
                 </Link>
               </div>
@@ -138,4 +158,6 @@ const DesignBlogPosts = () => {
   );
 };
 
-export default DesignBlogPosts;
+export default ArtBlogPosts;
+
+      

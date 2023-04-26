@@ -9,9 +9,12 @@ import Link from "next/link";
 import TagIcon from "../../components/TagIcon";
 import StarIcon from "../../components/StarIcon";
 import styles from "../technology/index.module.css";
+import Image from "next/image";
+
 
 const CinemaBlogPosts = () => {
   const [fieldCopies, setFieldCopies] = useState([]);
+  const [noPost, setNoPost] = useState(false);
 
   useEffect(() => {
     const client = createClient({
@@ -29,11 +32,11 @@ const CinemaBlogPosts = () => {
           fields: { post },
           sys,
         } = response.items[0];
-        
+      
         if (!response.items[0].fields.hasOwnProperty('post')) {
-          return <NoPublishedPosts topic={response.items[0].fields.name} />;
+            setNoPost(true)
+            return;
         }
-        
 
         const copies = post.map(({ fields = {}, sys }) => {
           const {
@@ -48,9 +51,9 @@ const CinemaBlogPosts = () => {
 
           return {
             authorName,
-            authorPhoto: authorPhoto && authorPhoto.fields.file.url,
+            authorPhoto: authorPhoto && `https:${authorPhoto.fields.file.url}`,
             authorWebsite,
-            blogPostImage: blogPostImage && blogPostImage.fields.file.url,
+            blogPostImage: blogPostImage && `https:${blogPostImage.fields.file.url}`,
             postBody: postBody && postBody.content[0],
             postTitle,
             published,
@@ -62,6 +65,8 @@ const CinemaBlogPosts = () => {
       })
       .catch(console.error);
   }, []);
+
+  if(noPost) return <NoPublishedPosts topic={"CINEMA"} />
 
   return (
     <div className="mx-auto">
@@ -91,10 +96,12 @@ const CinemaBlogPosts = () => {
           <div className={styles.profileInfo}>
             <div className="">
               {fields.authorPhoto && (
-                <img
+                <Image
                   src={fields.authorPhoto}
                   alt={fields.authorName}
                   className="w-12 h-12 rounded-full mr-4"
+                  width={50}
+                  height={50}
                 />
               )}
             </div>
@@ -123,7 +130,7 @@ const CinemaBlogPosts = () => {
             </div>
             <div className="mb-10">
               {fields.blogPostImage && (
-                <img
+                <Image
                   src={fields.blogPostImage}
                   width={180}
                   height={100}

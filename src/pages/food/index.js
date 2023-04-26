@@ -8,6 +8,8 @@ import Link from "next/link";
 import TagIcon from "../../components/TagIcon";
 import StarIcon from "../../components/StarIcon";
 import styles from "../technology/index.module.css";
+import Image from "next/image";
+
 
 const FoodBlogPosts = () => {
   const [fieldCopies, setFieldCopies] = useState([]);
@@ -43,9 +45,9 @@ const FoodBlogPosts = () => {
 
           return {
             authorName,
-            authorPhoto: authorPhoto && authorPhoto.fields.file.url,
+            authorPhoto: authorPhoto && `https:${authorPhoto.fields.file.url}`,
             authorWebsite,
-            blogPostImage: blogPostImage && blogPostImage.fields.file.url,
+            blogPostImage: blogPostImage && `https:${blogPostImage.fields.file.url}`,
             postBody: postBody && postBody.content[0],
             postTitle,
             published,
@@ -86,10 +88,12 @@ const FoodBlogPosts = () => {
           <div className={styles.profileInfo}>
             <div className="">
               {fields.authorPhoto && (
-                <img
+                <Image
                   src={fields.authorPhoto}
                   alt={fields.authorName}
                   className="w-12 h-12 rounded-full mr-4"
+                  width={50}
+                  height={50}
                 />
               )}
             </div>
@@ -118,7 +122,7 @@ const FoodBlogPosts = () => {
             </div>
             <div className="mb-10">
               {fields.blogPostImage && (
-                <img
+                <Image
                   src={fields.blogPostImage}
                   width={180}
                   height={100}

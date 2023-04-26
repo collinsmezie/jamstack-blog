@@ -2,6 +2,7 @@ import styles from "./components.module.css";
 import { useState, useEffect } from "react";
 import { createClient } from "contentful";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Navbar() {
   const [categories, setCategories] = useState([]);
@@ -27,7 +28,7 @@ export default function Navbar() {
     <div className="flex justify-center mt-6">
       <div className="flex items-center space-x-12">
         <div>
-          <img src="/images/blog.png" alt="Logo" width={140} height={140} />
+          <Image src="/images/blog.png" alt="Logo" width={140} height={140} />
         </div>
         {categories &&
           categories.map((category) => (
