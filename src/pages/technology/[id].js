@@ -76,6 +76,8 @@ export default function TechPostDetails({ post }) {
                     className="w-full object-cover object-center"
                     width={50}
                     height={50}
+                    layout="responsive"
+                    loading="eager"
                   />
                 )}
                 <div className="px-6 py-8">
