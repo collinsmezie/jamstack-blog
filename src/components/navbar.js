@@ -2,6 +2,7 @@ import styles from "./components.module.css";
 import { useState, useEffect } from "react";
 import { createClient } from "contentful";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Navbar() {
   const [categories, setCategories] = useState([]);

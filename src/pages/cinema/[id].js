@@ -4,6 +4,7 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { createClient } from "contentful";
 import StarIcon from "../../components/StarIcon";
 import { FaFacebook, FaTwitter, FaLinkedin, FaEnvelope, FaCheckCircle, FaPlayCircle} from 'react-icons/fa';
+import Image from "next/image";
 
 
 export async function getStaticPaths() {

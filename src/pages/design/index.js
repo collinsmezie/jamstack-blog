@@ -8,6 +8,8 @@ import Link from "next/link";
 import TagIcon from "../../components/TagIcon";
 import StarIcon from "../../components/StarIcon";
 import styles from "../technology/index.module.css";
+import Image from "next/image";
+
 
 const DesignBlogPosts = () => {
   const [fieldCopies, setFieldCopies] = useState([]);
