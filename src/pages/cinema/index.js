@@ -51,9 +51,9 @@ const CinemaBlogPosts = () => {
 
           return {
             authorName,
-            authorPhoto: authorPhoto && authorPhoto.fields.file.url,
+            authorPhoto: authorPhoto && `https:${authorPhoto.fields.file.url}`,
             authorWebsite,
-            blogPostImage: blogPostImage && blogPostImage.fields.file.url,
+            blogPostImage: blogPostImage && `https:${blogPostImage.fields.file.url}`,
             postBody: postBody && postBody.content[0],
             postTitle,
             published,
@@ -100,6 +100,8 @@ const CinemaBlogPosts = () => {
                   src={fields.authorPhoto}
                   alt={fields.authorName}
                   className="w-12 h-12 rounded-full mr-4"
+                  width={50}
+                  height={50}
                 />
               )}
             </div>

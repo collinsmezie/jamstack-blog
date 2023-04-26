@@ -92,6 +92,8 @@ export default function ArtPostDetails({ post }) {
         <Image
           src={authorPhoto.fields.file.url}
           alt={authorName}
+          width={50}
+          height={50}
           className="w-12 h-12 rounded-full mr-4"
         />
       )}

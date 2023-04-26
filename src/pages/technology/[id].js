@@ -71,10 +71,11 @@ export default function TechPostDetails({ post }) {
               <div className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-300">
                 {blogPostImage && (
                   <Image
-                    src={blogPostImage.fields.file.url}
+                    src={`https:${blogPostImage.fields.file.url}`}
                     alt={postTitle}
                     className="w-full object-cover object-center"
-                    style={{ maxHeight: "400px" }}
+                    width={50}
+                    height={50}
                   />
                 )}
                 <div className="px-6 py-8">
@@ -90,9 +91,11 @@ export default function TechPostDetails({ post }) {
     <div className="flex items-center mb-4">
       {authorPhoto && (
         <Image
-          src={authorPhoto.fields.file.url}
+          src={`https:${authorPhoto.fields.file.url}`}
           alt={authorName}
           className="w-12 h-12 rounded-full mr-4"
+          width={50}
+          height={50}
         />
       )}
       <div>

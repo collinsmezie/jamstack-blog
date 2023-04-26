@@ -112,6 +112,8 @@ const ArtBlogPosts = () => {
                   src={fields.authorPhoto}
                   alt={fields.authorName}
                   className="w-12 h-12 rounded-full mr-4"
+                  width={50}
+                  height={50}
                 />
               )}
             </div>

@@ -74,7 +74,8 @@ export default function SciencePostDetails({ post }) {
                     src={blogPostImage.fields.file.url}
                     alt={postTitle}
                     className="w-full object-cover object-center"
-                    style={{ maxHeight: "400px" }}
+                    width={50}
+                    height={50}
                   />
                 )}
                 <div className="px-6 py-8">
