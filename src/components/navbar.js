@@ -6,6 +6,7 @@ import Image from "next/image";
 
 export default function Navbar() {
   const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true); // 👈 loading state
 
   useEffect(() => {
     async function fetchCategories() {
@@ -19,13 +20,14 @@ export default function Navbar() {
       });
 
       setCategories(response.items);
+      setLoading(false); // 👈 set loading to false after fetching
     }
 
     fetchCategories();
   }, []);
 
   return (
-    <div className="flex justify-center mt-6">
+    <div className="flex justify-center mt-6 border border-teal-100">
       <div className="flex items-center space-x-12">
         <div>
           <Image src="/images/blog.png" alt="Logo" width={140} height={140} />
