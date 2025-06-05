@@ -27,7 +27,8 @@ export default function Navbar() {
   }, []);
 
   return (
-    <div className="flex justify-center mt-6 border border-teal-100">
+    // <div className="flex justify-center mt-6 border border-teal-100">
+    <div className="flex justify-center mt-6">
       <div className="flex items-center space-x-12">
         <div>
           <Image src="/images/blog.png" alt="Logo" width={140} height={140} />

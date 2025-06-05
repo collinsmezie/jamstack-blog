@@ -5,14 +5,18 @@ import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import Head from "next/head";
 import Link from "next/link";
-import TagIcon from "../../components/TagIcon";
 import StarIcon from "../../components/StarIcon";
 import styles from "../technology/index.module.css";
 import Image from "next/image";
+import TopicHeader from "@/components/TopicHeader";
+import BlogPostCard from "@/components/BlogPostCard";
+
 
 
 const DesignBlogPosts = () => {
   const [fieldCopies, setFieldCopies] = useState([]);
+  const [loading, setLoading] = useState(true); // 👈 loading state
+
 
   useEffect(() => {
     const client = createClient({
@@ -30,7 +34,7 @@ const DesignBlogPosts = () => {
           fields: { post },
           sys,
         } = response.items[0];
-        // console.log('response',response);
+        console.log('Design response here', response);
 
         const copies = post.map(({ fields = {}, sys }) => {
           const {
@@ -52,87 +56,58 @@ const DesignBlogPosts = () => {
             postTitle,
             published,
             id: sys.id,
+            slug: "design",
           };
         });
 
         setFieldCopies(copies);
+        setLoading(false); // 👈 stop loading
       })
-      .catch(console.error);
+      .catch((error) => {
+        console.error(error);
+        setLoading(false); // still stop loading on error
+      });
   }, []);
 
   return (
-    <div className="mx-auto">
+    // <div className="mx-auto">
+    <div className="mx-auto max-w-7xl">
       <Navbar />
       <Head>
         <title>Design Blog Posts</title>
       </Head>
-      <div className={styles.topicSection}>
-        <div className={styles.topic}>
-          <div className="inline-block rounded-full bg-gray-200 p-1 mr-3">
-            <TagIcon />
-          </div>
-          <h1 className={styles.tech}>Design</h1>
-        </div>
-        <div className={styles.buttons}>
-          <button className="bg-teal-500 hover:bg-white text-white hover:text-teal-500 font-bold py-1 px-2 rounded-full border-2 border-teal-500 hover:border-teal-500 transition-colors duration-300">
-            Follow
-          </button>
-          <button className="hover:bg-white text-teal-500 hover:text-teal-500 font-bold py-1 px-2 rounded-full border-2 border-teal-500 hover:border-teal-500 transition-colors duration-300">
-            Start writing
-          </button>
-        </div>
-      </div>
+      {/* <div className="container mx-auto px-4 border border-teal-100"> */}
+      <div className="container mx-auto px-4">
+        <TopicHeader
+          title="DESIGN"
+          // icon={<StarIcon />}
+          onFollow={() => console.log("Follow clicked")}
+          onStartWriting={() => console.log("Start writing clicked")}
+        />
 
-      {fieldCopies.map((fields) => (
-        <div key={fields.id} className={styles.postCard}>
-          <div className={styles.profileInfo}>
-            <div className="">
-              {fields.authorPhoto && (
-                <Image
-                  src={fields.authorPhoto}
-                  alt={fields.authorName}
-                  className="w-12 h-12 rounded-full mr-4"
-                  width={50}
-                  height={50}
-                />
-              )}
-            </div>
-            <div className={styles.nameAndDate}>
-              <p>{fields.authorName}</p>
-              <p className="text-gray-500 text-sm mt-0.5">
-                Published on: {new Date(fields.published).toDateString()}
-              </p>
-            </div>
-            <div className="ml-4 flex items-center">
-              <StarIcon className="w-6 h-6 mr-2" />
-              <p className="ml-4 text-gray-500 text-sm">Members only</p>
-            </div>
+
+        {loading ? (
+          <div className="flex justify-center items-center h-64">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-teal-500 border-solid"></div>
           </div>
-          <div className={styles.postSection}>
-            <div className={styles.postTitleAndText}>
-              <h2 className="text-2xl font-bold mb-4">{fields.postTitle}</h2>
-              <div className="max-w-4xl mb-7">
-                {documentToReactComponents(fields.postBody)}
-              </div>
-              <div className="flex items-center">
-                <Link href={`/design/${fields.id}`}>
-                  <div className={styles.readPostBtn}>Read More</div>
-                </Link>
-              </div>
-            </div>
-            <div className="mb-10">
-              {fields.blogPostImage && (
-                <Image
-                  src={fields.blogPostImage}
-                  width={180}
-                  height={100}
-                  alt={fields.postTitle}
-                />
-              )}
-            </div>
-          </div>
-        </div>
-      ))}
+        ) : (
+          fieldCopies.map((fields) => (
+
+            <BlogPostCard
+              key={fields.id}
+              id={fields.id}
+              authorName={fields.authorName}
+              authorPhoto={fields.authorPhoto}
+              authorWebsite={fields.authorWebsite}
+              blogPostImage={fields.blogPostImage}
+              postBody={fields.postBody}
+              postTitle={fields.postTitle}
+              published={fields.published}
+              slug={fields.slug}
+            />
+          ))
+        )}
+      </div>
       <Footer />
     </div>
   );

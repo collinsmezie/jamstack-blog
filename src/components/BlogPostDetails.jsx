@@ -5,7 +5,7 @@ import styles from "./components.module.css";
 
 
 
-const BlogPostCard = ({ slug, title, image, description, date, author }) => {
+const BlogPostDetails = ({ slug, title, image, description, date, author }) => {
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden">
       <Link href={`/blog/${slug}`}>
@@ -56,4 +56,5 @@ const BlogPostCard = ({ slug, title, image, description, date, author }) => {
 };
 
 
-export default BlogPostCard;
+export default BlogPostDetails;
+
