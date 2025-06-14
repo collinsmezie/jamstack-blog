@@ -4,7 +4,7 @@ import Footer from "@/components/footer";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import BlogPostCard from "../components/BlogPostCard";
+import DefaultPostCard from "@/components/DefaultPostCard";
 
 
 const blogPosts = [
@@ -71,7 +71,7 @@ export default function Home() {
           <div className="mt-12">
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {blogPosts.map((post) => (
-                <BlogPostCard key={post.slug} {...post} />
+                <DefaultPostCard key={post.slug} {...post} />
               ))}
             </div>
           </div>
